@@ -17,7 +17,9 @@ import yaml
 st.set_page_config(page_title="TradeX", page_icon=":books:", 
 layout="wide")
 
-googletagm.inject_ga()
+# To inject google tag into the file, does not work inside streamlit cloud
+# googletagm.inject_ga()
+
 #----- CREATE HASHED PASSWORD----
 # hashed_passwords = stauth.Hasher(['xxx', 'xxxx']).generate()
 # print(hashed_passwords)
