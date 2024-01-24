@@ -28,7 +28,7 @@ def stock_opt():
 
 	#Then visit the json page for fetching the json
 	res = s.get(actualurl,headers=headers,timeout=2)
-	print(res.json())
+	# print(res.json())
 
 	fnolistdata=res.json()['data']
 	# print(fnolistdata)
@@ -37,12 +37,12 @@ def stock_opt():
 	return fnolistdata
 
 	
-def main():
-	fnolistdata=stock_opt()
-	for data in fnolistdata:
-		symbol=data['identifier']
-		print(symbol)
+# def main():
+# 	fnolistdata=stock_opt()
+# 	for data in fnolistdata:
+# 		symbol=data['identifier']
+# 		print(symbol)
 	
-#Main program
-if __name__ == '__main__':
-	main()
+# #Main program
+# if __name__ == '__main__':
+# 	main()

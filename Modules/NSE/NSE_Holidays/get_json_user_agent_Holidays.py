@@ -34,7 +34,7 @@ def fno_holiday_list():
 	
 	#This website prevents normal Traffic, unlesss you specify the user agent, the server won't response
 	resp = requests.get(url,headers=headers)
-	print("Done..")
+	# print("Done..")
 	# print(resp)
 	holidays = resp.json()	
 	fno_holidays=holidays["FO"]
@@ -50,11 +50,11 @@ def check_holiday(fno_holidays):
 	for holiday in fno_holidays:
 		# FO - Futures and Options
 		holiday_str=holiday["tradingDate"]
-		print(holiday_str)
+		# print(holiday_str)
 		holidate_dateobj=convert_to_date_obj(holiday_str,"%d-%b-%Y")
 
 		if holidate_dateobj.day==currentday.day:
-			print("Today is holiday")
+			# print("Today is holiday")
 			holiday=True
 			break
 
@@ -67,10 +67,10 @@ def check_holiday(fno_holidays):
 
 	return holiday
 
-def main():
-	fno_holidays=fno_holiday_list()
-	check_holiday(fno_holidays)
+# def main():
+# 	fno_holidays=fno_holiday_list()
+# 	check_holiday(fno_holidays)
 
-#Main program
-if __name__ == '__main__':
-	main()
+# #Main program
+# if __name__ == '__main__':
+# 	main()

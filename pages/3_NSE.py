@@ -1,7 +1,7 @@
 # Import Modules
-from Modules.NSE.NSE_Holidays import get_json_user_agent_Holidays
-
-
+from Modules.NSE.NSE_Holidays import get_json_user_agent_Holidays as nse_holiday
+from Modules.NSE.NSE_FNO import get_json_cookie_bypass_FNO as nse_fno
+from Helpers import helper_functions_adv as help_function_adv
 import streamlit as st  # pip install streamlit
 
 # from google.oauth2.credentials import Credentials
@@ -27,7 +27,7 @@ layout="wide")
 
 #----- LOGIN ------
 # with open('./config.yaml') as file:
-# 	config = yaml.load(file, Loader=yaml.SafeLoader)
+#   config = yaml.load(file, Loader=yaml.SafeLoader)
 
 # authenticator = stauth.Authenticate(
 #     config['credentials'],
@@ -59,17 +59,55 @@ if authentication_status:
 	# name="User"
 	# st.sidebar.title(f"Welcome {name}")
 	# st.sidebar.header("Dashboard")
+	# st.header("Nifty Options")
+	# res=nse_fno.underlying_info()
+	# st.dataframe(res)
 
-	st.subheader("Holidays:")
-	res=get_json_user_agent_Holidays.fno_holiday_list()
+	tab1, tab2, tab3, tab4 = st.tabs(["Nifty", "BankNifty", "Stocks","Holidays"])
 
-	st.dataframe(res)
+	
+	with tab1:
+		res=nse_fno.index_optionchain('NIFTY')
+		st.dataframe(res)
+
+	with tab2:
+		res=nse_fno.index_optionchain('BANKNIFTY')
+		st.dataframe(res)
+
+	with tab3:
+		allstock_json=nse_fno.underlying_fnolist()
+		allstock_list=[]
+
+		for stock in allstock_json:
+			allstock_list.append(stock['symbol'])
+
+		# st.write(allstock_list)
+			
+		# allstock_list.append('None')
+		st.write("Total Stock List: ",len(allstock_list))
+		# default_ix = allstock_list.index("ACC")
+		default_ix=0
+		option = st.selectbox(
+			"Select the Stock",
+			options=allstock_list,
+			index=default_ix
+		)
+
+		res=nse_fno.stock_optionchain(option)
+		st.dataframe(res)
+
+	with tab4:
+		st.header("Holidays:")
+		res=nse_holiday.fno_holiday_list()
+
+		st.dataframe(res)
+
 	# st.markdown(res)
 	# button_clicked = st.button("Click me!")
 
 	# # Check if the button is clicked
 	# if button_clicked:
-	# 	st.write("Button clicked!")
+	#   st.write("Button clicked!")
 		
 elif authentication_status == False:
 	st.error('Username/password is incorrect')

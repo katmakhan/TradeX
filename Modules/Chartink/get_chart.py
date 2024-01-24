@@ -47,7 +47,7 @@ def getchart_indicators(emalabel,emavalue,query,use_live,limit,size,widget_id,en
 
 	# print(headers)
 	res = s.post(actualurl,headers=headers,data=form_data,timeout=3)
-	print(res)
+	# print(res)
 	# print(res.json())
 
 	s.close()

@@ -26,14 +26,14 @@ def underlying_info():
 	#Then visit the json page for fetching the json
 	actualurl='https://www.nseindia.com/api/underlying-information'
 	res = s.get(actualurl,headers=headers,timeout=2)
-	print(res.json())
+	# print(res.json())
 
 	s.close()
 	return res.json()
 
-def main():
-	underlying_info()
+# def main():
+# 	underlying_info()
 
-#Main program
-if __name__ == '__main__':
-	main()
+# #Main program
+# if __name__ == '__main__':
+# 	main()

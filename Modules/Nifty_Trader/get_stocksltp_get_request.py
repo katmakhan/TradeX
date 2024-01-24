@@ -15,20 +15,20 @@ def getchart_data(symbol):
 	# https://webapi.niftytrader.in/webapi/Analysis/stock-financial-data
 	
 	res = requests.get(actualurl,headers=headers)
-	print(res.json())
+	# print(res.json())
 
 	if(res.json().get('resultData') is None):
 		print("No result fetched")
 		return
 
 	chartdata=res.json()['resultData'][0]['chart_data']
-	print(chartdata)
+	# print(chartdata)
 	return chartdata
 
-def main():
-	symbol="bpcl"
-	chartdata=getchart_data(symbol)
+# def main():
+# 	symbol="bpcl"
+# 	chartdata=getchart_data(symbol)
 	
-#Main program
-if __name__ == '__main__':
-	main()
+# #Main program
+# if __name__ == '__main__':
+# 	main()

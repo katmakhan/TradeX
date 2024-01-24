@@ -1,6 +1,9 @@
 
 import streamlit as st  # pip install streamlit
 
+from Modules.Nifty_Trader import get_gapupstocks_post_request as gapupstocks
+from Modules.Nifty_Trader import get_stocksdetail_post_request as detailsstocks 
+from Modules.Nifty_Trader import get_stocksltp_get_request as ltpstocks 
 # from google.oauth2.credentials import Credentials
 
 # not working with google-auth-oauthlib==0.8.0
@@ -57,13 +60,15 @@ if authentication_status:
 	# st.sidebar.title(f"Welcome {name}")
 	# st.sidebar.header("Dashboard")
 
-	
-	# first_column, second_column = st.columns(2)
-	# with first_column:
-	# 	st.subheader("Gainers:")
+	gap_up_stocks,gap_down_stocks=gapupstocks.gap_analysis()
+	first_column, second_column = st.columns(2)
+	with first_column:
+		st.subheader("Gap UP Stocks:")
+		st.dataframe(gap_up_stocks)
 
-	# with second_column:
-	# 	st.subheader("Losers:")
+	with second_column:
+		st.subheader("Gap Down Stocks:")
+		st.dataframe(gap_down_stocks)
 
 elif authentication_status == False:
 	st.error('Username/password is incorrect')

@@ -55,30 +55,40 @@ if authentication_status:
 	# Welcome Name
 	name="Traders"
 	st.sidebar.title(f"Welcome {name}")
-	st.sidebar.header("Features")
+	st.sidebar.header("Powered By StockEx")
 
 
-	options=['Analyse','Fetch']
-	options.append('None')
-	default_ix = options.index("None")
-	option = st.sidebar.selectbox(
-		"Select the Option",
-		options=options,
-		index=default_ix
-	)
+	# options=['Analyse','Fetch']
+	# options.append('None')
+	# default_ix = options.index("None")
+	# option = st.sidebar.selectbox(
+	# 	"Select the Option",
+	# 	options=options,
+	# 	index=default_ix
+	# )
 
 	
 	# Project or who paid is selected, then show debit and credit columns
 
 	first_column, second_column = st.columns(2)
 	with first_column:
-		st.subheader("Terms:")
-		# df_debit.reset_index(inplace=True)
-		# st.dataframe(df_debit)
-	with second_column:
-		st.subheader("Conditions:")
-		# df_credit.reset_index(inplace=True)
-		# st.dataframe(df_credit)
+		st.subheader("Terms and Conditions:")
+		st.success("Educational and personel purpose only")
+		st.markdown('''
+		The following website have their respective api:
+		- [Chartink](https://chartink.com/)
+		- [NSE](https://www.nseindia.com/)
+		- [Trendlyn](https://trendlyne.com/)
+		- [Nifty Trader](https://www.niftytrader.in/)
+		'''
+		)
+		st.warning("Over using the API might result in IP Restrictions.")
+
+	# with second_column:
+	# 	st.subheader("Conditions:")
+	# 	st.write("Please use the webapp for personel purpose only")
+	# 	st.markdown("Donot try to use the code for any type of server attacks")
+	# 	st.markdown("Feel free to edit the code and use it for personel educational purpose only")
 		
 elif authentication_status == False:
 	st.error('Username/password is incorrect')

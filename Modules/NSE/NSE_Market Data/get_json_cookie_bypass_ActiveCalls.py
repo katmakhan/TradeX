@@ -28,7 +28,7 @@ def active_calls():
 
 	#Then visit the json page for fetching the json
 	res = s.get(actualurl,headers=headers,timeout=2)
-	print(res.json())
+	# print(res.json())
 
 	fnolistdata=res.json()['volume']['data']
 	# print(fnolistdata)
@@ -36,12 +36,12 @@ def active_calls():
 	s.close()
 	return fnolistdata
 	
-def main():
-	fnolistdata=active_calls()
-	for data in fnolistdata:
-		symbol=data['identifier']
-		print(symbol)
+# def main():
+# 	fnolistdata=active_calls()
+# 	for data in fnolistdata:
+# 		symbol=data['identifier']
+# 		print(symbol)
 
-#Main program
-if __name__ == '__main__':
-	main()
+# #Main program
+# if __name__ == '__main__':
+# 	main()

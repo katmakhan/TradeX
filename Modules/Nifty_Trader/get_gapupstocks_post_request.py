@@ -29,12 +29,12 @@ def gap_analysis():
 	data={}
 	data['Date']=curr_day_str
 	data=json.dumps(data)
-	print(data)
+	# print(data)
 
 	#Then visit the json page for fetching the json
 	actualurl='https://webapi.niftytrader.in/webapi/Resource/gap-analysis'
 	res = requests.post(actualurl, data=data,headers=headers)
-	print(res.json())
+	# print(res.json())
 
 	if(res.json().get('resultData') is None):
 		print("No result fetched")
@@ -47,12 +47,12 @@ def gap_analysis():
 	return gap_up_stocks,gap_down_stocks
 
 
-def main():
-	gap_up_stocks,gap_down_stocks=gap_analysis()
+# def main():
+# 	gap_up_stocks,gap_down_stocks=gap_analysis()
 
-	for stocks in gap_up_stocks:
-		print(stocks['symbol_name'])
+# 	for stocks in gap_up_stocks:
+# 		print(stocks['symbol_name'])
 	
-#Main program
-if __name__ == '__main__':
-	main()
+# #Main program
+# if __name__ == '__main__':
+# 	main()

@@ -3,6 +3,7 @@
 
 
 import streamlit as st  # pip install streamlit
+from Modules.Trendlyne import get_json_cookie_bypass_trendlyne as trendlyne 
 
 # from google.oauth2.credentials import Credentials
 
@@ -58,7 +59,10 @@ if authentication_status:
 	# Welcome Name
 	# name="User"
 	# st.sidebar.title(f"Welcome {name}")
-	# st.sidebar.header("Dashboard")
+	st.header("Most Active Calls")
+	res=trendlyne.mostactive_calls()
+	# st.dataframe(res)
+	st.write(res)
 
 
 
