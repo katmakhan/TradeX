@@ -60,9 +60,11 @@ if authentication_status:
 	# name="User"
 	# st.sidebar.title(f"Welcome {name}")
 	st.header("Most Active Calls")
-	res=trendlyne.mostactive_calls()
-	# st.dataframe(res)
-	st.write(res)
+	try:
+		res=trendlyne.mostactive_calls()
+		st.write(res)
+	except:
+		st.warning("Something went wrong")
 
 
 

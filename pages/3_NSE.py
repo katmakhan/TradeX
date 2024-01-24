@@ -67,40 +67,57 @@ if authentication_status:
 
 	
 	with tab1:
-		res=nse_fno.index_optionchain('NIFTY')
-		st.dataframe(res)
+		try:
+			res=nse_fno.index_optionchain('NIFTY')
+			st.dataframe(res)
+		except:
+			st.warning("Something went wrong")
 
 	with tab2:
-		res=nse_fno.index_optionchain('BANKNIFTY')
-		st.dataframe(res)
+		try:
+			res=nse_fno.index_optionchain('BANKNIFTY')
+			st.dataframe(res)
+		except:
+			st.warning("Something went wrong")
 
 	with tab3:
-		allstock_json=nse_fno.underlying_fnolist()
-		allstock_list=[]
+		try:
+			allstock_json=nse_fno.underlying_fnolist()
+			allstock_list=[]
 
-		for stock in allstock_json:
-			allstock_list.append(stock['symbol'])
+			for stock in allstock_json:
+				allstock_list.append(stock['symbol'])
 
-		# st.write(allstock_list)
+					# st.write(allstock_list)
 			
-		# allstock_list.append('None')
-		st.write("Total Stock List: ",len(allstock_list))
-		# default_ix = allstock_list.index("ACC")
-		default_ix=0
-		option = st.selectbox(
-			"Select the Stock",
-			options=allstock_list,
-			index=default_ix
-		)
+			# allstock_list.append('None')
+			st.write("Total Stock List: ",len(allstock_list))
+			# default_ix = allstock_list.index("ACC")
+			default_ix=0
+			option = st.selectbox(
+				"Select the Stock",
+				options=allstock_list,
+				index=default_ix
+			)
 
-		res=nse_fno.stock_optionchain(option)
-		st.dataframe(res)
+			try:
+				res=nse_fno.stock_optionchain(option)
+				st.dataframe(res)
+			except:
+				st.warning("Something went wrong")
+
+		except:
+			st.warning("Something went wrong")
+
+
 
 	with tab4:
 		st.header("Holidays:")
-		res=nse_holiday.fno_holiday_list()
-
-		st.dataframe(res)
+		try:
+			res=nse_holiday.fno_holiday_list()
+			st.dataframe(res)
+		except:
+			st.warning("Something went wrong")
 
 	# st.markdown(res)
 	# button_clicked = st.button("Click me!")
