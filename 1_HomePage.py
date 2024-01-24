@@ -5,7 +5,7 @@ import streamlit as st  # pip install streamlit
 
 # not working with google-auth-oauthlib==0.8.0
 # pip install google-auth-oauthlib==0.4.6
-
+import googletag_inject as googletagm
 
 # Authenticators
 import streamlit_authenticator as stauth
@@ -17,7 +17,7 @@ import yaml
 st.set_page_config(page_title="TradeX", page_icon=":books:", 
 layout="wide")
 
-
+googletagm.inject_ga()
 #----- CREATE HASHED PASSWORD----
 # hashed_passwords = stauth.Hasher(['xxx', 'xxxx']).generate()
 # print(hashed_passwords)

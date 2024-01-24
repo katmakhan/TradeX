@@ -30,4 +30,4 @@ def inject_ga():
         new_html = html.replace('<head>', '<head>\n' + GA_SCRIPT)
         index_path.write_text(new_html)
 
-inject_ga()
+# inject_ga()
