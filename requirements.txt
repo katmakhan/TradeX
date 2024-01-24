@@ -8,3 +8,4 @@ google-auth-oauthlib==0.4.6
 gspread==5.7.2
 plotly-express==0.4.1
 numpy==1.21.6
+BeautifulSoup4==4.12.3
