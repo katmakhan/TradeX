@@ -13,11 +13,13 @@ from Modules.Nifty_Trader import get_stocksltp_get_request as ltpstocks
 # Authenticators
 import streamlit_authenticator as stauth
 import yaml
+import traceback
+import pandas as pd
 # import SafeLoader
 
 
 # Running streamlit
-st.set_page_config(page_title="TradeX", page_icon=":books:", 
+st.set_page_config(page_title="TradeX", page_icon="🔰", 
 layout="wide")
 
 
@@ -63,15 +65,25 @@ if authentication_status:
 	try:
 		gap_up_stocks,gap_down_stocks=gapupstocks.gap_analysis()
 		first_column, second_column = st.columns(2)
+
+		gap_up_stocks=pd.DataFrame(gap_up_stocks)
+		gap_down_stocks=pd.DataFrame(gap_down_stocks)
+
+		# gap_up_stocks.drop(['B', 'C'], axis=1)
 		with first_column:
 			st.subheader("Gap UP Stocks:")
-			st.dataframe(gap_up_stocks)
+			st.dataframe(gap_up_stocks[['symbol_name','gap_status','change_percent',
+				'today_close',
+				'gap_value']])
 
 		with second_column:
 			st.subheader("Gap Down Stocks:")
-			st.dataframe(gap_down_stocks)
-	except:
+			st.dataframe(gap_down_stocks[['symbol_name','gap_status','change_percent',
+				'today_close',
+				'gap_value']])
+	except Exception as e:
 		st.warning("Something went wrong")
+		print(traceback.print_exc())
 
 elif authentication_status == False:
 	st.error('Username/password is incorrect')

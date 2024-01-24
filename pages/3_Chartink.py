@@ -14,13 +14,15 @@ import plotly.graph_objects as go
 # Authenticators
 import streamlit_authenticator as stauth
 import yaml
+import traceback
+
 # import SafeLoader
 
 import pandas as pd
 
 
 # Running streamlit
-st.set_page_config(page_title="TradeX", page_icon=":books:", 
+st.set_page_config(page_title="TradeX", page_icon="🔰", 
 layout="wide")
 
 
@@ -68,10 +70,9 @@ if authentication_status:
 
 		# st.write(allstock_list)
 		
-		# allstock_list.append('None')
-		st.write("Total Stock List: ",len(allstock_list))
-		# default_ix = allstock_list.index("None")
-		default_ix=0
+		# allstock_list.append('NIFTY50')
+		# st.write("Total Stock List: ",len(allstock_list))
+		default_ix=len(allstock_list)-1
 		stockname = st.selectbox(
 			"Select the Stock",
 			options=allstock_list,
@@ -93,7 +94,7 @@ if authentication_status:
 
 		first_column, second_column = st.columns(2)
 		with first_column:
-			st.subheader("Chartink EMA:")
+			# st.subheader(f"Chart : {stockname}")
 
 			# 	# Separate fields
 			indicatorlabel =f'{indicatorname} {period}'
@@ -121,6 +122,7 @@ if authentication_status:
 
 				# Extracting the relevant data from JSON
 				df = pd.DataFrame(res)
+				# print(df)
 
 				dfopen = pd.DataFrame(res['groupData'][0]["results"][0])
 				dfhigh = pd.DataFrame(res['groupData'][0]["results"][1])
@@ -145,7 +147,7 @@ if authentication_status:
 
 				# Set chart layout
 				fig.update_layout(
-				title="OHCL Chart",
+				title=stockname,
 				xaxis_title='Time',
 				yaxis_title='Price',
 				xaxis_rangeslider_visible=False,
@@ -158,11 +160,14 @@ if authentication_status:
 				# Display the chart using Streamlit
 				st.plotly_chart(fig)
 
-				st.write(res)
-			except:
+				# st.write(res)
+			except Exception as e:
 				st.warning("Something went wrong")
+				# print(e)
+				print(traceback.print_exc())
 	except:
 		st.warning("Something went wrong")
+		print(traceback.print_exc())
 	# with second_column:
 	# 	st.subheader("Chart")
 

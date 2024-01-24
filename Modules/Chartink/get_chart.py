@@ -22,7 +22,7 @@ def getchart_indicators(emalabel,emavalue,query,use_live,limit,size,widget_id,en
 	testurl="https://chartink.com/"
 	actualurl='https://chartink.com/stocks-new/process'
 	res=s.get(testurl)
-	print(res)
+	# print(res)
 	# print(res.cookies.get_dict())
 
 	# Convert the xrf token

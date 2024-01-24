@@ -30,8 +30,6 @@ def fno_holiday_list():
 	'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36'
 	}
 	
-	print("Fetching url...")
-	
 	#This website prevents normal Traffic, unlesss you specify the user agent, the server won't response
 	resp = requests.get(url,headers=headers)
 	# print("Done..")

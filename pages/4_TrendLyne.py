@@ -18,7 +18,7 @@ import yaml
 
 
 # Running streamlit
-st.set_page_config(page_title="TradeX", page_icon=":books:", 
+st.set_page_config(page_title="TradeX", page_icon="🔰", 
 layout="wide")
 
 

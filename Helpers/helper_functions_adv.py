@@ -21,11 +21,11 @@ def fetch_allstocknames():
 		# For example, print the values in the 1st, 2nd, and 3rd columns
 		symbol=row[9]
 		if ("-BZ" in symbol or "-EQ" in symbol or "-BE" in symbol) and "ETF" not in symbol:
-			print(symbol)
+			# print(symbol)
 			total_symbols.append(symbol)
 			# NSE:MCDOWEL-N-EQ
 			total_symbols_updated.append(symbol.split("-")[0].split(":")[1])
 
-	print("\n")
-	print("Total Symbols: ",len(total_symbols))
+	# print("\n")
+	# print("Total Symbols: ",len(total_symbols))
 	return total_symbols_updated

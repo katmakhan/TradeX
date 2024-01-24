@@ -28,7 +28,7 @@ def index_optionchain(symbol):
 
 	#Then visit the json page for fetching the json
 	res = s.get(actualurl,headers=headers,timeout=2)
-	print(res.json())
+	# print(res.json())
 
 	fnolistdata=res.json()['records']['data']
 	# print(fnolistdata)
@@ -56,7 +56,7 @@ def stock_optionchain(symbol):
 
 	#Then visit the json page for fetching the json
 	res = s.get(actualurl,headers=headers,timeout=2)
-	print(res.json())
+	# print(res.json())
 
 	fnolistdata=res.json()['records']['data']
 	# print(fnolistdata)
@@ -84,7 +84,7 @@ def underlying_fnolist():
 
 	#Then visit the json page for fetching the json
 	res = s.get(actualurl,headers=headers,timeout=2)
-	print(res.json())
+	# print(res.json())
 
 	fnolistdata=res.json()['data']['UnderlyingList']
 	# print(fnolistdata)
