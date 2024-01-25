@@ -93,7 +93,7 @@ if authentication_status:
 			option_chain_data=nse_fno.index_optionchain('NIFTY')
 			try:
 				res=nse_market.marketstatus()
-				res_chart=nse_market.marketChart_indices("NIFTY%2050")
+				
 				market_status = res["marketState"][0]["marketStatus"]
 				index = res["marketState"][0]["index"]
 				last_price = res["marketState"][0]["last"]
@@ -107,29 +107,24 @@ if authentication_status:
 				if variation<0:
 					st.warning(result_string)
 
+				# with st.expander("Chart"):
+				res_chart=nse_market.marketChart_indices("NIFTY%2050")
 				# Extracting timestamp and values from the data
 				timestamps, values = zip(*res_chart['grapthData'])
-
 				# Convert timestamps to date format
 				dates = [datetime.utcfromtimestamp(timestamp / 1000) for timestamp in timestamps]
-
 				# Filter out data points after 3:30 pm (15:30)
 				filtered_data = [(ts, val, date) for ts, val, date in zip(timestamps, values, dates) if date.time() <= datetime.strptime('15:30:00', '%H:%M:%S').time()]
-
 				# Extract filtered timestamps and values
 				filtered_timestamps, filtered_values, filtered_dates = zip(*filtered_data)
-
 				# Create a Plotly line chart
 				fig = go.Figure(data=go.Scatter(x=filtered_dates, y=filtered_values, mode='lines'))
-
-
 				# Customize the layout
 				fig.update_layout(
 					title="NIFTY 50",
 					xaxis_title='Time',
 					yaxis_title='LTP',
 				)
-
 				# Display the Plotly chart
 				st.plotly_chart(fig)
 
@@ -210,8 +205,8 @@ if authentication_status:
 			option_chain_data=nse_fno.index_optionchain('BANKNIFTY')
 			try:
 				# res=nse_market.marketstatus()
+				# with st.expander("Chart"):
 				res_chart=nse_market.marketChart_indices("NIFTY%20BANK")
-				
 				# market_status = res["marketState"][0]["marketStatus"]
 				# index = res["marketState"][0]["index"]
 				# last_price = res["marketState"][0]["last"]
@@ -219,35 +214,26 @@ if authentication_status:
 				# formatted_variation = "{:.2f}".format(variation)
 				# percent_change = res["marketState"][0]["percentChange"]
 				# result_string = f"{index}: {last_price} ({percent_change}%)  {formatted_variation}"
-
 				# if variation>0:
 				# 	st.success(result_string)
 				# if variation<0:
 				# 	st.warning(result_string)
-
 				# Extracting timestamp and values from the data
 				timestamps, values = zip(*res_chart['grapthData'])
-
 				# Convert timestamps to date format
 				dates = [datetime.utcfromtimestamp(timestamp / 1000) for timestamp in timestamps]
-
 				# Filter out data points after 3:30 pm (15:30)
 				filtered_data = [(ts, val, date) for ts, val, date in zip(timestamps, values, dates) if date.time() <= datetime.strptime('15:30:00', '%H:%M:%S').time()]
-
 				# Extract filtered timestamps and values
 				filtered_timestamps, filtered_values, filtered_dates = zip(*filtered_data)
-
 				# Create a Plotly line chart
 				fig = go.Figure(data=go.Scatter(x=filtered_dates, y=filtered_values, mode='lines'))
-
-
 				# Customize the layout
 				fig.update_layout(
 					title="Bank Nifty",
 					xaxis_title='Time',
 					yaxis_title='LTP',
 				)
-
 				# Display the Plotly chart
 				st.plotly_chart(fig)
 
