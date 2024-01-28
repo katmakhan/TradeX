@@ -9,8 +9,7 @@ import streamlit as st  # pip install streamlit
 # not working with google-auth-oauthlib==0.8.0
 # pip install google-auth-oauthlib==0.4.6
 
-from Modules.Grow import get_json_marketchart as growchart
-from Modules.Grow import get_json_topnifty_options as growniftyoptions
+from Modules.Grow import grow_apis as grow_api
 
 # Authenticators
 import streamlit_authenticator as stauth
@@ -65,7 +64,7 @@ if authentication_status:
 	# st.sidebar.title(f"Welcome {name}")
 	st.subheader("Most Active Options")
 	try:
-		res=growniftyoptions.nifty_topoptions()
+		res=grow_api.nifty_topoptions()
 		derivatives_data = res["derivatives"]
 		df = pd.json_normalize(derivatives_data)
 

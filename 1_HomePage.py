@@ -5,7 +5,7 @@ import streamlit as st  # pip install streamlit
 
 # not working with google-auth-oauthlib==0.8.0
 # pip install google-auth-oauthlib==0.4.6
-import googletag_inject as googletagm
+# import googletag_inject as googletagm
 
 # Authenticators
 import streamlit_authenticator as stauth
@@ -13,6 +13,8 @@ import yaml
 # import SafeLoader
 
 
+def handle_button_click(page_name):
+    st.markdown(f"[Click here to go to {page_name}](http://localhost:8501/{page_name})", unsafe_allow_html=True)
 
 # Running streamlit
 st.set_page_config(page_title="TradeX", page_icon="🔰", 
@@ -27,7 +29,7 @@ layout="wide")
 
 #----- LOGIN ------
 # with open('./config.yaml') as file:
-# 	config = yaml.load(file, Loader=yaml.SafeLoader)
+#   config = yaml.load(file, Loader=yaml.SafeLoader)
 
 # authenticator = stauth.Authenticate(
 #     config['credentials'],
@@ -65,9 +67,9 @@ if authentication_status:
 	# options.append('None')
 	# default_ix = options.index("None")
 	# option = st.sidebar.selectbox(
-	# 	"Select the Option",
-	# 	options=options,
-	# 	index=default_ix
+	#   "Select the Option",
+	#   options=options,
+	#   index=default_ix
 	# )
 
 	
@@ -90,46 +92,66 @@ if authentication_status:
 		st.warning("Over using the API might result in IP Restrictions.")
 
 	# with second_column:
-	# 	st.subheader("Nifty 50")
-	# 	code_minichart_nifty = '''
-	# 	<!-- TradingView Widget BEGIN -->
-	# 	<iframe src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?symbol=NSE%3ANIFTY&locale=in" width="100%" height="100%" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no"></iframe>
-	# 	<!-- TradingView Widget END -->
-	# 	'''
-	# 	st.markdown(code_minichart_nifty, unsafe_allow_html=True)
+	# 	# Create buttons for navigation
+	# 	if st.button("Chartink"):
+	# 		handle_button_click("Chartink")
 
-	# 	st.subheader("BankNifty")
-	# 	code_minichart_banknifty = '''
-	# 	<!-- TradingView Widget BEGIN -->
-	# 	<iframe src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?symbol=NSE%3ABANKNIFTY&locale=in" width="100%" height="100%" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no"></iframe>
-	# 	<!-- TradingView Widget END -->
-	# 	'''
-	# 	st.markdown(code_minichart_banknifty, unsafe_allow_html=True)
+	# 	if st.button("NSE"):
+	# 		handle_button_click("NSE")
+
+	# 	if st.button("TradingView"):
+	# 		handle_button_click("TradingView")
+
+	# 	if st.button("Trendlyn"):
+	# 		handle_button_click("Trendlyn")
+
+	# 	if st.button("Nifty"):
+	# 		handle_button_click("Nifty")
+
+	# 	if st.button("Grow"):
+	# 		handle_button_click("Grow")
+	
+	# with second_column:
+	#   st.subheader("Nifty 50")
+	#   code_minichart_nifty = '''
+	#   <!-- TradingView Widget BEGIN -->
+	#   <iframe src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?symbol=NSE%3ANIFTY&locale=in" width="100%" height="100%" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no"></iframe>
+	#   <!-- TradingView Widget END -->
+	#   '''
+	#   st.markdown(code_minichart_nifty, unsafe_allow_html=True)
+
+	#   st.subheader("BankNifty")
+	#   code_minichart_banknifty = '''
+	#   <!-- TradingView Widget BEGIN -->
+	#   <iframe src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?symbol=NSE%3ABANKNIFTY&locale=in" width="100%" height="100%" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no"></iframe>
+	#   <!-- TradingView Widget END -->
+	#   '''
+	#   st.markdown(code_minichart_banknifty, unsafe_allow_html=True)
 
 	# with second_column:
 
-	# 	candles_data=
-	# 	# Extracting timestamps and values from the data
-	# 	timestamps, values = zip(*candles_data)
+	#   candles_data=
+	#   # Extracting timestamps and values from the data
+	#   timestamps, values = zip(*candles_data)
 
-	# 	# Convert timestamps to datetime for better formatting on x-axis
-	# 	dates = [pd.to_datetime(timestamp, unit='s') for timestamp in timestamps]
+	#   # Convert timestamps to datetime for better formatting on x-axis
+	#   dates = [pd.to_datetime(timestamp, unit='s') for timestamp in timestamps]
 
-	# 	# Create a Plotly line chart
-	# 	fig = go.Figure(data=go.Scatter(x=dates, y=values, mode='lines'))
+	#   # Create a Plotly line chart
+	#   fig = go.Figure(data=go.Scatter(x=dates, y=values, mode='lines'))
 
-	# 	# Customize the layout
-	# 	fig.update_layout(
-	# 	    title='Line Chart of Candles',
-	# 	    xaxis_title='Timestamp',
-	# 	    yaxis_title='Values',
-	# 	)
+	#   # Customize the layout
+	#   fig.update_layout(
+	#       title='Line Chart of Candles',
+	#       xaxis_title='Timestamp',
+	#       yaxis_title='Values',
+	#   )
 
-	# 	# Streamlit app
-	# 	st.title("Line Chart with Plotly")
+	#   # Streamlit app
+	#   st.title("Line Chart with Plotly")
 
-	# 	# Display the Plotly chart
-	# 	st.plotly_chart(fig)
+	#   # Display the Plotly chart
+	#   st.plotly_chart(fig)
 
 
 	with st.expander("Forex"):

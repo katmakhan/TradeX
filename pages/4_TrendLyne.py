@@ -3,7 +3,7 @@
 
 
 import streamlit as st  # pip install streamlit
-from Modules.Trendlyne import get_json_cookie_bypass_trendlyne as trendlyne 
+from Modules.Trendlyne import trendlyne_apis as trendlyne_api
 
 # from google.oauth2.credentials import Credentials
 
@@ -61,7 +61,7 @@ if authentication_status:
 	# st.sidebar.title(f"Welcome {name}")
 	st.header("Most Active Calls")
 	try:
-		res=trendlyne.mostactive_calls()
+		res=trendlyne_api.mostactive_calls()
 		st.write(res)
 	except:
 		st.warning("Something went wrong")

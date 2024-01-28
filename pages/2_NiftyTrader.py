@@ -1,9 +1,7 @@
 
 import streamlit as st  # pip install streamlit
 
-from Modules.Nifty_Trader import get_gapupstocks_post_request as gapupstocks
-from Modules.Nifty_Trader import get_stocksdetail_post_request as detailsstocks 
-from Modules.Nifty_Trader import get_stocksltp_get_request as ltpstocks 
+from Modules.Nifty_Trader import niftytrader_apis as niftytrader_api
 # from google.oauth2.credentials import Credentials
 
 # not working with google-auth-oauthlib==0.8.0
@@ -26,7 +24,6 @@ layout="wide")
 #----- CREATE HASHED PASSWORD----
 # hashed_passwords = stauth.Hasher(['xxx', 'xxxx']).generate()
 # print(hashed_passwords)
-
 #----- LOGIN ------
 # with open('./config.yaml') as file:
 # 	config = yaml.load(file, Loader=yaml.SafeLoader)
@@ -63,7 +60,7 @@ if authentication_status:
 	# st.sidebar.header("Dashboard")
 
 	try:
-		gap_up_stocks,gap_down_stocks=gapupstocks.gap_analysis()
+		gap_up_stocks,gap_down_stocks=niftytrader_api.gap_analysis()
 		first_column, second_column = st.columns(2)
 
 		gap_up_stocks=pd.DataFrame(gap_up_stocks)
@@ -72,15 +69,21 @@ if authentication_status:
 		# gap_up_stocks.drop(['B', 'C'], axis=1)
 		with first_column:
 			st.subheader("Gap UP Stocks:")
-			st.dataframe(gap_up_stocks[['symbol_name','gap_status','change_percent',
-				'today_close',
-				'gap_value']])
+			if len(gap_up_stocks)!=0:
+				st.dataframe(gap_up_stocks[['symbol_name','gap_status','change_percent',
+					'today_close',
+					'gap_value']])
+			else:
+				st.warning("No results found")
 
 		with second_column:
 			st.subheader("Gap Down Stocks:")
-			st.dataframe(gap_down_stocks[['symbol_name','gap_status','change_percent',
-				'today_close',
-				'gap_value']])
+			if len(gap_down_stocks)!=0:
+				st.dataframe(gap_down_stocks[['symbol_name','gap_status','change_percent',
+					'today_close',
+					'gap_value']])
+			else:
+				st.warning("No results found")
 	except Exception as e:
 		st.warning("Something went wrong")
 		print(traceback.print_exc())

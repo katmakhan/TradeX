@@ -1,5 +1,5 @@
 # Import Modules
-from Modules.Chartink import get_chart
+from Modules.Chartink import chartink_apis as chartink_api 
 from Helpers import helper_functions_adv as help_function_adv
 
 import streamlit as st  # pip install streamlit
@@ -110,7 +110,7 @@ if authentication_status:
 			query = f"select open, high, low, close, volume, {indicatorvalue} as '{indicatorlabel}' where symbol='{symbol}'"
 
 			try:
-				res=get_chart.getchart_indicators(indicatorlabel,indicatorvalue,query,use_live,limit,size,widget_id,end_time,timeframe,symbol,scan_link)
+				res=chartink_api.getchart_indicators(indicatorlabel,indicatorvalue,query,use_live,limit,size,widget_id,end_time,timeframe,symbol,scan_link)
 				# # Traverse the data
 				# groupdata=res['groupData'][0]['results']
 				# for data in groupdata:

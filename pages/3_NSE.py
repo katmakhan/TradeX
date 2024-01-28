@@ -1,7 +1,5 @@
 # Import Modules
-from Modules.NSE.NSE_Holidays import get_json_user_agent_Holidays as nse_holiday
-from Modules.NSE.NSE_FNO import get_json_cookie_bypass_FNO as nse_fno
-from Modules.NSE.NSE_Market_Data import get_json_cookie_bypass_NSEMarketData as nse_market
+from Modules.NSE import nse_apis as nse_api
 from Helpers import helper_functions_adv as help_function_adv
 import streamlit as st  # pip install streamlit
 import plotly.graph_objects as go
@@ -90,9 +88,9 @@ if authentication_status:
 	
 	with tab1:
 		try:
-			option_chain_data=nse_fno.index_optionchain('NIFTY')
+			option_chain_data=nse_api.index_optionchain('NIFTY')
 			try:
-				res=nse_market.marketstatus()
+				res=nse_api.marketstatus()
 				
 				market_status = res["marketState"][0]["marketStatus"]
 				index = res["marketState"][0]["index"]
@@ -108,7 +106,7 @@ if authentication_status:
 					st.warning(result_string)
 
 				# with st.expander("Chart"):
-				res_chart=nse_market.marketChart_indices("NIFTY%2050")
+				res_chart=nse_api.marketChart_indices("NIFTY%2050")
 				# Extracting timestamp and values from the data
 				timestamps, values = zip(*res_chart['grapthData'])
 				# Convert timestamps to date format
@@ -202,11 +200,11 @@ if authentication_status:
 
 	with tab2:
 		try:
-			option_chain_data=nse_fno.index_optionchain('BANKNIFTY')
+			option_chain_data=nse_api.index_optionchain('BANKNIFTY')
 			try:
 				# res=nse_market.marketstatus()
 				# with st.expander("Chart"):
-				res_chart=nse_market.marketChart_indices("NIFTY%20BANK")
+				res_chart=nse_api.marketChart_indices("NIFTY%20BANK")
 				# market_status = res["marketState"][0]["marketStatus"]
 				# index = res["marketState"][0]["index"]
 				# last_price = res["marketState"][0]["last"]
@@ -313,7 +311,7 @@ if authentication_status:
 	with tab4:
 		st.header("Holidays:")
 		try:
-			res=nse_holiday.fno_holiday_list()
+			res=nse_api.fno_holiday_list()
 			st.dataframe(res)
 		except:
 			st.warning("Something went wrong")
